@@ -50,7 +50,6 @@ contract PizzaShop {
         _;
     }
 
-    // checks if 
     modifier isAtStage(Stages _stage) {
         require(pizzaShopStage == _stage, "Not at correct stage!");
         _;
@@ -61,7 +60,6 @@ contract PizzaShop {
         _;
     }
 
-    // checks if 
     function buyPizza(uint256 _price) payable public correctAmount() isAtStage(Stages.readyToOrder) shopOpened notPaused{
         updateStage(Stages.makePizza);
         emit BoughtPizza(msg.sender, _price);
@@ -89,7 +87,7 @@ contract PizzaShop {
     function getFunds() public view returns(uint256){
         return address(this).balance;
     }
-    // checks if 
+
     function madePizza() public isAtStage(Stages.makePizza) shopOpened{
         updateStage(Stages.deliverPizza);
     }
@@ -99,12 +97,10 @@ contract PizzaShop {
         updateStage(Stages.readyToOrder);
     }
 
-    // 
     function updateStage(Stages _stage) public {
         pizzaShopStage = _stage;
     }
 
-    // 
     function pause(bool _state) public onlyOwner {
         paused = _state;
     }
